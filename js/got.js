@@ -15,7 +15,7 @@ function successAjax(xhttp) {
   var characterData = doRemoveDeadCharacters(userDatas[2].data);
   doSortCharactersByName(characterData);
   getCharacterList(characterData);
-  console.log(characterData);
+  setSearchFunction();
   /*
       Pár sorral lejebb majd ezt olvashatod:
       IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ!
@@ -143,4 +143,34 @@ function doSortCharactersByName(parameterArray) {
     }
     endIndex = newEndIndex;
   }
+}
+
+function getCharacterByName() {
+  var images = document.querySelectorAll('.character-list img');
+  var searchText = document.querySelector('#search-text');
+  var searchingForName = searchText.value;
+  searchText.value = '';
+  var found = false;
+  var index = 0;
+  while (index < images.length && !found) {
+    if (images[index].characterData.name.toLowerCase().indexOf(searchingForName.toLowerCase()) > -1) {
+      found = true;
+      getRightSide(images[index].characterData);
+      doRemoveSelected();
+      images[index].classList.add('selected');
+    }
+    index++;
+  }
+  if (!found) {
+    document.querySelector('.cahracter-data').innerHTML = 'Character not found!';
+  }
+}
+
+function setSearchFunction() {
+  var searchText = document.querySelector('#search-text');
+  searchText.placeholder = 'Search for characters.';
+  var searchButton = document.querySelector('#search-button');
+  searchButton.addEventListener('click', function ev() {
+    getCharacterByName();
+  });
 }
