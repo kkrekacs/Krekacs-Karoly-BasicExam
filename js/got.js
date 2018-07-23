@@ -13,6 +13,7 @@ function successAjax(xhttp) {
   // itt a json content, benne a data változóban
   var userDatas = JSON.parse(xhttp.responseText);
   var characterData = doRemoveDeadCharacters(userDatas[2].data);
+  doSortCharactersByName(characterData);
   getCharacterList(characterData);
   console.log(characterData);
   /*
@@ -79,5 +80,20 @@ function getCharacterList(parameterArray) {
   for (var i = 0; i < parameterArray.length; i++) {
     var singleCharacterDiv = getSingleCharacter(parameterArray[i]);
     characterListDiv.appendChild(singleCharacterDiv);
+  }
+}
+
+function doSortCharactersByName(parameterArray) {
+  var endIndex = parameterArray.length - 1;
+  var newEndIndex;
+  while (endIndex > 1) {
+    newEndIndex = 0;
+    for (var i = 0; i < endIndex; i++) {
+      if (parameterArray[i].name > parameterArray[i + 1].name) {
+        [parameterArray[i], parameterArray[i + 1]] = [parameterArray[i + 1], parameterArray[i]];
+        newEndIndex = i;
+      }
+    }
+    endIndex = newEndIndex;
   }
 }
