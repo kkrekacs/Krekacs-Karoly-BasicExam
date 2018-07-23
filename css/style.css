@@ -1,5 +1,17 @@
+@font-face {
+	font-family: 'Roboto';
+	src: url('/fonts/Roboto-Light.ttf'); 
+}
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('/fonts/Roboto-Bold.ttf'); 
+	font-weight: bold;
+}
+
 body {
   margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -39,7 +51,6 @@ body {
 }
 
 .character-div p {
-  font-weight: bold;
   margin-top: 5px;
   margin-bottom: 15px;
 }
