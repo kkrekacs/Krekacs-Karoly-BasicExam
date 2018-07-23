@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+}
+
+.character-list,
+.one-character {
+  min-height: 100vh;
+  float: left;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.character-list {
+  width: 70%;
+  background-image: url(/assets/site/mapblue.jpg);
+  background-size: cover;
+}
+
+.one-character {
+  width: 30%;
+  background-color: #d0d0d0;
+}
+
+.searchbar {
+  position: absolute;
+  bottom: 5%;
+}
