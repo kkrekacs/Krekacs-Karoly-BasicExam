@@ -47,12 +47,19 @@ function getSingleCharacterProperty(parameterObject, parameterProperty) {
   return parameterObject[parameterProperty];
 }
 
-function getCharacterProfileImg(parameterObject) {
+function getCharacterProfileImg(parameterObject, imgType) {
   var characterPicture = document.createElement('img');
   characterPicture.className = 'character-picture';
   characterPicture.characterData = parameterObject;
-  characterPicture.src = `/${getSingleCharacterProperty(parameterObject, 'portrait')}`;
-
+  if (imgType === 'portrait') {
+    characterPicture.src = `/${getSingleCharacterProperty(parameterObject, 'portrait')}`;
+  }
+  if (imgType === 'picture' ) {
+    characterPicture.src = `/${getSingleCharacterProperty(parameterObject, 'picture')}`;
+  }
+  if (imgType === 'picture' && parameterObject.name === 'Jorah Mormont') {
+    characterPicture.src = `/${getSingleCharacterProperty(parameterObject, 'picture')}.jpg`;
+  }
   return characterPicture;
 }
 
@@ -64,11 +71,51 @@ function getCharacterNameP(parameterObject) {
   return characterName;
 }
 
+function getCharacterBioP(parameterObject) {
+  var characterBio = document.createElement('p');
+  characterBio.className = 'character-bio';
+  characterBio.innerHTML = getSingleCharacterProperty(parameterObject, 'bio');
+
+  return characterBio;
+}
+
+function getRightSide(parameterObject) {
+  var rightSideDiv = document.querySelector('.character-data');
+  var characterPicture = getCharacterProfileImg(parameterObject, 'picture');
+  var characterName = getCharacterNameP(parameterObject);
+  var characterBio = getCharacterBioP(parameterObject);
+  characterBio.className = 'character-bio';
+  rightSideDiv.innerHTML = '';
+  rightSideDiv.appendChild(characterPicture);
+  rightSideDiv.appendChild(characterName);
+  if (parameterObject.house !== '') {
+    var characterHouse = document.createElement('img');
+    characterHouse.className = 'house-image';
+    characterHouse.src = `/assets/houses/${parameterObject.house}.png`;
+    rightSideDiv.appendChild(characterHouse);
+  }
+  rightSideDiv.appendChild(characterBio);
+}
+
+function doRemoveSelected() {
+  var images = document.querySelectorAll('img');
+  for (var i = 0; i < images.length; i++) {
+    if (images[i].classList.contains('selected')) {
+      images[i].classList.remove('selected');
+    }
+  }
+}
+
 function getSingleCharacter(parameterObject) {
   var characterDiv = document.createElement('div');
   characterDiv.className = 'character-div';
-  var characterPicture = getCharacterProfileImg(parameterObject);
+  var characterPicture = getCharacterProfileImg(parameterObject, 'portrait');
   var characterName = getCharacterNameP(parameterObject);
+  characterPicture.addEventListener('click', function ev() {
+    getRightSide(this.characterData);
+    doRemoveSelected();
+    this.classList.add('selected');
+  });
   characterDiv.appendChild(characterPicture);
   characterDiv.appendChild(characterName);
 

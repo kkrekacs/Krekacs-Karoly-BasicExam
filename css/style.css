@@ -47,3 +47,43 @@ body {
 .container-div img {
   margin: auto;
 }
+
+.selected {
+  opacity: 0.6;
+}
+
+.character-picture:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.got-title {
+  display: block;
+  margin: auto;
+  max-width: 300px;
+}
+
+.character-data {
+  overflow: auto;
+}
+
+.character-data .character-picture {
+  display: block;
+  margin: 15px auto;
+  height: 150px;
+}
+
+.character-data .character-name {
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 15px;
+  width: 80%;
+}
+
+.character-data .house-image {
+ width: 10%;
+}
+
+.character-bio {
+  padding: 15px;
+}
