@@ -1,0 +1,17 @@
+SELECT house, COUNT(name) FROM characters
+   WHERE dead=" " AND organization=" "
+   GROUP BY house;
+
+SELECT * FROM characters
+  WHERE bio LIKE '%hero%' AND dead=" ";
+
+SELECT name FROM characters
+  WHERE organization LIKE '%night%' AND house=' ';
+
+SELECT name AS 'Hero', alias AS 'Nick Name', house AS 'Big House' 
+  FROM characters
+  WHERE 
+    dead=' ' AND 
+    house<>'Lannister' AND 
+    organization<>'Royalguard' AND 
+    (bio NOT LIKE '%Lannister%' OR bio NOT LIKE '%King_s Landing%');
