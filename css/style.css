@@ -40,6 +40,7 @@ body {
 
 .searchbar {
   position: absolute;
+  left: 76%;
   bottom: 5%;
 }
 
@@ -71,10 +72,11 @@ body {
 .got-title {
   display: block;
   margin: auto;
-  max-width: 300px;
+  max-width: 40vh;
 }
 
 .character-data {
+  max-height: 75vh;
   overflow: auto;
 }
 
@@ -97,4 +99,24 @@ body {
 
 .character-bio {
   padding: 15px;
+}
+
+#search-text,
+#search-button {
+  line-height: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #1fa2fa;
+}
+
+#search-text {
+ width:150px;
+}
+
+#search-button{
+  background: #1fa2fa;
+}
+
+#search-button:hover{
+  cursor: pointer;
 }
