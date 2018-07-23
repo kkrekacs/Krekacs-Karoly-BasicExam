@@ -15,17 +15,35 @@ body {
 }
 
 .character-list {
-  width: 70%;
+  width: 75%;
+  max-height: 100vh;
   background-image: url(/assets/site/mapblue.jpg);
   background-size: cover;
 }
 
 .one-character {
-  width: 30%;
+  width: 25%;
   background-color: #d0d0d0;
 }
 
 .searchbar {
   position: absolute;
   bottom: 5%;
+}
+
+.character-div {
+  min-width: 140px;
+  width: 12.5%;
+  display: inline-block;
+  text-align: center;
+}
+
+.character-div p {
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.container-div img {
+  margin: auto;
 }

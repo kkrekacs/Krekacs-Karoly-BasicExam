@@ -13,6 +13,7 @@ function successAjax(xhttp) {
   // itt a json content, benne a data változóban
   var userDatas = JSON.parse(xhttp.responseText);
   var characterData = doRemoveDeadCharacters(userDatas[2].data);
+  getCharacterList(characterData);
   console.log(characterData);
   /*
       Pár sorral lejebb majd ezt olvashatod:
@@ -39,4 +40,44 @@ function doRemoveDeadCharacters(parameterArray) {
   }
 
   return parameterArray;
+}
+
+function getSingleCharacterProperty(parameterObject, parameterProperty) {
+  return parameterObject[parameterProperty];
+}
+
+function getCharacterProfileImg(parameterObject) {
+  var characterPicture = document.createElement('img');
+  characterPicture.className = 'character-picture';
+  characterPicture.characterData = parameterObject;
+  characterPicture.src = `/${getSingleCharacterProperty(parameterObject, 'portrait')}`;
+
+  return characterPicture;
+}
+
+function getCharacterNameP(parameterObject) {
+  var characterName = document.createElement('p');
+  characterName.className = 'character-name';
+  characterName.innerHTML = getSingleCharacterProperty(parameterObject, 'name');
+
+  return characterName;
+}
+
+function getSingleCharacter(parameterObject) {
+  var characterDiv = document.createElement('div');
+  characterDiv.className = 'character-div';
+  var characterPicture = getCharacterProfileImg(parameterObject);
+  var characterName = getCharacterNameP(parameterObject);
+  characterDiv.appendChild(characterPicture);
+  characterDiv.appendChild(characterName);
+
+  return characterDiv;
+}
+
+function getCharacterList(parameterArray) {
+  var characterListDiv = document.querySelector('.character-list');
+  for (var i = 0; i < parameterArray.length; i++) {
+    var singleCharacterDiv = getSingleCharacter(parameterArray[i]);
+    characterListDiv.appendChild(singleCharacterDiv);
+  }
 }
