@@ -162,7 +162,7 @@ function getCharacterByName() {
     index++;
   }
   if (!found) {
-    document.querySelector('.cahracter-data').innerHTML = 'Character not found!';
+    document.querySelector('.character-data').innerHTML = 'Character not found!';
   }
 }
 
