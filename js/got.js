@@ -1,7 +1,7 @@
 function getData(url, callbackFunc) {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
+  xhttp.onreadystatechange = function getReady() {
+    if (this.readyState === 4 && this.status === 200) {
       callbackFunc(this);
     }
   };
@@ -12,7 +12,8 @@ function getData(url, callbackFunc) {
 function successAjax(xhttp) {
   // itt a json content, benne a data változóban
   var userDatas = JSON.parse(xhttp.responseText);
-  console.log(userDatas);
+  var characterData = doRemoveDeadCharacters(userDatas[2].data);
+  console.log(characterData);
   /*
       Pár sorral lejebb majd ezt olvashatod:
       IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ!
@@ -25,7 +26,17 @@ function successAjax(xhttp) {
 }
 
 // Írd be a json fileod nevét/útvonalát úgy, ahogy nálad van
-getData('/json/aJsonFileodNeve.json', successAjax);
+getData('/json/characters.json', successAjax);
 
 // Live servert használd mindig!!!!!
 /* IDE ÍRD A FÜGGVÉNYEKET!!!!!! NE EBBE AZ EGY SORBA HANEM INNEN LEFELÉ! */
+function doRemoveDeadCharacters(parameterArray) {
+  for (var i = 0; i < parameterArray.length; i++) {
+    if (parameterArray[i].dead === 'true') {
+      parameterArray.splice(i, 1);
+      i--;
+    }
+  }
+
+  return parameterArray;
+}
